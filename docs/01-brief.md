@@ -67,8 +67,8 @@ SYSTEM_LOG	         |        What each admin did and when, with details.
 
 ## 5. Nice-to-have features (only if there's time)
 1. An alarm feature on the app that goes off when the certain stop(selected by the user) is near.
-2. 
-3. 
+2. Low-balance alert. The passenger app (or an SMS) warns when passenger.balance falls below a set amount, such as ₱50, so students don't get stuck at the scanner. 
+3. Admin reports and CSV export. A dashboard of daily income per route, riders per hour, and student vs regular riders, with an export button.
 
 ## 6. Similar apps I looked at
 1. Beep card (Philippines): a tap-to-pay stored-value card for trains and buses. Bus Link borrows the tap-and-go card idea and loading money at a station (our kiosk).
