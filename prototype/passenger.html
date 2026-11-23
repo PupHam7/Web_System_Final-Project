@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - Passenger App</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="appGoaCentralMain">
+
+        <div id="toast-container" class="appToastContainer"></div>
+
+        <div class="appRoleBanner">
+            <div>
+                <span class="roleAreViewingText">You are viewing as</span>
+                <div class="rolePanel">Passenger App <span class="roleText">· Commuter</span></div>
+                <p class="roleText2">Check balance, top up with an e-wallet, and view transaction history.</p>
+            </div>
+            <a href="index.html" class="roleSwitchRoleBtn">← System map</a>
+        </div>
+
+        <section id="view-mobile" class="viewPanel">
+            <div class="passengerCsPanel">
+
+                <!-- Sub-Panel 1: APP HOME SCREEN -->
+                <div id="mobile-subview-home" class="mobileSubview">
+                    <!-- Mobile Header -->
+                    <div class="passengerCsPanel2">
+                        <div class="inlineRow">
+                            <div class="passengerCsPanel3">
+                                CS
+                            </div>
+                            <div>
+                                <span class="passengerWelcomeCommuterText">Welcome commuter</span>
+                                <span class="passengerCarlFrancisText">Carl Francis Israel</span>
+                            </div>
+                        </div>
+                        <span class="passengerPsuStudentText">
+                            PSU STUDENT PASS
+                        </span>
+                    </div>
+
+                    <!-- Digital Pass Virtual Card -->
+                    <div class="passengerPartidoStatePanel">
+                        <div class="passengerPanel">
+                            <i data-lucide="bus" class="passengerIconBus"></i>
+                        </div>
+                        <div class="passengerPartidoStatePanel2">
+                            <div>
+                                <span class="passengerPartidoStateText">PARTIDO STATE UNIVERSITY</span>
+                                <h4 class="passengerStudentTransitTitle">Student Transit & Bus Link</h4>
+                            </div>
+                            <i data-lucide="nfc" class="passengerIconNfc"></i>
+                        </div>
+
+                        <div class="passengerCardBalancePanel">
+                            <span class="passengerCardBalanceText">CARD BALANCE</span>
+                            <span id="mobile-app-balance" class="passengerAppBalance">₱340.00</span>
+                        </div>
+
+                        <div class="passengerStudentIdPanel">
+                            <div>
+                                <span class="passengerStudentIdText">STUDENT ID</span>
+                                <span class="passengerPsuText">PSU-2026-0881</span>
+                            </div>
+                            <div>
+                                <span class="passengerStudentIdText">STATUS</span>
+                                <span class="passengerEnrolledActiveText">Enrolled Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mobile-low-balance" class="passengerLowBalance isHidden">
+                        <span class="passengerLowBalanceText">Low balance. Top up with your e-wallet before your next ride.</span>
+                        <button onclick="openMobileTopupModal()" class="passengerTopUpBtn">Top Up</button>
+                    </div>
+
+                    <!-- App Quick Actions -->
+                    <div class="passengerTopUpPanel">
+                        <button onclick="openMobileTopupModal()" class="passengerTopUpBtn2">
+                            <i data-lucide="plus-circle" class="passengerIconPlusCircle"></i>
+                            <span class="passengerTopUpText">Top-Up E-Wallet</span>
+                        </button>
+                        <button onclick="openMobileTicketModal()" class="passengerTopUpBtn2">
+                            <i data-lucide="qr-code" class="passengerIconQrCode"></i>
+                            <span class="passengerTopUpText">Generate E-Ticket</span>
+                        </button>
+                    </div>
+
+                    <!-- Digital Ride Receipt & Ticket Storage -->
+                    <div class="passengerRecentTripPanel">
+                        <h5 class="passengerRecentTripTitle">
+                            <span>Recent Trip Receipts</span>
+                            <button onclick="switchMobileTab('history')" class="passengerViewAllBtn">View All</button>
+                        </h5>
+                        <div class="passengerReceiptsList" id="mobile-receipts-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-Panel 2: TRIP HISTORY SCREEN -->
+                <div id="mobile-subview-history" class="mobileSubview isHidden">
+                    <div class="passengerTransactionHistoryPanel">
+                        <div>
+                            <h3 class="passengerTransactionHistoryTitle">Transaction History</h3>
+                            <p class="passengerClickAnyText">Click any receipt to show verification QR</p>
+                        </div>
+                        <span class="passengerVerifiedLogsText">Verified Logs</span>
+                    </div>
+
+                    <div class="passengerFullHistoryList" id="mobile-full-history-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Sub-Panel 3: PASSENGER PROFILE SCREEN -->
+                <div id="mobile-subview-profile" class="mobileSubview isHidden">
+                    <div class="passengerCommuterProfilePanel">
+                        <h3 class="passengerTransactionHistoryTitle">Commuter Profile</h3>
+                        <p class="passengerClickAnyText">Partido State University Dual Pass</p>
+                    </div>
+
+                    <div class="passengerCsPanel4">
+                        <div class="passengerCsPanel5">
+                            CS
+                        </div>
+                        <h4 class="passengerCarlFrancisTitle">Carl Francis Israel</h4>
+                        <span class="passengerStudentIdText2">
+                            Student ID: PSU-2026-0881
+                        </span>
+                    </div>
+
+                    <div class="passengerCourseYearPanel">
+                        <div class="passengerCourseYearPanel2">
+                            <span class="passengerCourseYearText">Course / Year</span>
+                            <span class="passengerBsitRdText">BSIT - 3rd Year</span>
+                        </div>
+                        <div class="passengerCourseYearPanel2">
+                            <span class="passengerCourseYearText">Discount Tier</span>
+                            <span class="passengerPsuStudentText2">20% PSU Student Fare</span>
+                        </div>
+                        <div class="passengerCourseYearPanel2">
+                            <span class="passengerCourseYearText">Linked Wallet</span>
+                            <span class="passengerGcashText">GCash (0917-***-8821)</span>
+                        </div>
+                        <div class="passengerNfcRfidPanel">
+                            <span class="passengerCourseYearText">NFC RFID Tag Status</span>
+                            <span class="passengerActiveValidatedText">Active / Validated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Bar Simulation -->
+                <div class="passengerHomePanel">
+                    <button onclick="switchMobileTab('home')" id="mobile-nav-home" class="mobileNavBtn isActive">
+                        <i data-lucide="home" class="icon"></i>
+                        <span>Home</span>
+                    </button>
+                    <button onclick="switchMobileTab('history')" id="mobile-nav-history" class="mobileNavBtn">
+                        <i data-lucide="clock" class="icon"></i>
+                        <span>History</span>
+                    </button>
+                    <button onclick="switchMobileTab('profile')" id="mobile-nav-profile" class="mobileNavBtn">
+                        <i data-lucide="user" class="icon"></i>
+                        <span>Profile</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-mobile-ticket" class="modalOverlay isHidden">
+        <div class="mobileTicketModalBusLinkPanel">
+            <h3 class="mobileTicketModalTicketModalTitle" id="ticket-modal-title">Bus Link Digital E-Ticket</h3>
+            <p class="mobileTicketModalTicketModalSubtitle" id="ticket-modal-subtitle">Show this QR code or Ref ID to the bus conductor scanner</p>
+
+            <div class="mobileTicketModalPanel">
+                <!-- Dynamic SVG QR Placeholder -->
+                <svg class="mobileTicketModalGraphic" viewBox="0 0 100 100">
+                    <path fill="#000" d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 40h20v20H50zM30 30h20v10H30zM70 70h20v20H70z"/>
+                </svg>
+            </div>
+
+            <div class="mobileTicketModalReferenceIdPanel">
+                <div class="mobileTicketModalReferenceIdPanel2">
+                    <span class="mobileTicketModalReferenceIdText">REFERENCE ID</span>
+                    <span id="ticket-ref-display" class="mobileTicketModalTicketRefDisplay">REF-9021</span>
+                </div>
+                <div class="mobileTicketModalRouteTripPanel">
+                    <span class="mobileTicketModalRouteTripText">Route / Trip:</span>
+                    <span id="ticket-route-display" class="mobileTicketModalTicketRouteDisplay">Goa to Naga</span>
+                </div>
+                <div class="mobileTicketModalRouteTripPanel">
+                    <span class="mobileTicketModalRouteTripText">Fare Charged:</span>
+                    <span id="ticket-fare-display" class="mobileTicketModalTicketFareDisplay">₱68.00 (PSU Student)</span>
+                </div>
+                <div class="mobileTicketModalRouteTripPanel">
+                    <span class="mobileTicketModalRouteTripText">Passenger / ID:</span>
+                    <span id="ticket-holder-display" class="mobileTicketModalTicketHolderDisplay">PSU-2026-0881</span>
+                </div>
+                <div class="mobileTicketModalStatusPanel">
+                    <span class="mobileTicketModalRouteTripText">Status:</span>
+                    <span id="ticket-status-display" class="mobileTicketModalTicketStatusDisplay">VERIFIED PAID</span>
+                </div>
+            </div>
+
+            <button onclick="closeModal('modal-mobile-ticket')" class="mobileTicketModalDoneBtn">Done</button>
+        </div>
+    </div>
+
+    <div id="modal-mobile-topup" class="modalOverlay isHidden">
+        <div class="mobileTopupModalTopUpPanel">
+            <h3 class="mobileTopupModalTopUpTitle">Top Up via E-Wallet</h3>
+            <p class="mobileTopupModalChooseEText">Choose an e-wallet and an amount to add to your card.</p>
+            <div id="topup-methods" class="mobileTopupModalTopupMethods"></div>
+            <div class="mobileTopupModalPanel">
+                <button onclick="setTopupAmount(50)" class="mobileTopupModalBtn">₱50</button>
+                <button onclick="setTopupAmount(100)" class="mobileTopupModalBtn">₱100</button>
+                <button onclick="setTopupAmount(200)" class="mobileTopupModalBtn">₱200</button>
+                <button onclick="setTopupAmount(500)" class="mobileTopupModalBtn">₱500</button>
+            </div>
+            <input type="number" id="topup-amount" min="10" max="5000" placeholder="Other amount (₱10 - ₱5,000)" class="mobileTopupModalTopupAmount">
+            <div class="mobileTopupModalCancelPanel">
+                <button onclick="closeModal('modal-mobile-topup')" class="mobileTopupModalCancelBtn">Cancel</button>
+                <button onclick="confirmMobileTopup()" class="mobileTopupModalConfirmTopBtn">Confirm Top-Up</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

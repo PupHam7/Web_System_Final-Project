@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - Bus Operator Admin</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="appGoaCentralMain">
+
+        <div id="toast-container" class="appToastContainer"></div>
+
+        <div class="appRoleBanner">
+            <div>
+                <span class="roleAreViewingText">You are viewing as</span>
+                <div class="rolePanel">Bus Operator Admin <span class="roleText">· Bus Link operator</span></div>
+                <p class="roleText2">Manage cards, fleet, and offline sync.</p>
+            </div>
+            <a href="index.html" class="roleSwitchRoleBtn">← System map</a>
+        </div>
+
+        <section id="view-admin" class="viewPanel">
+            <div class="adminTerminalOutpostPanel">
+                <div>
+                    <h1 class="adminTerminalOutpostTitle">
+                        <i data-lucide="shield-check" class="adminIconShieldCheck"></i>
+                        <span>Terminal Outpost Administration & Fleet Ops</span>
+                    </h1>
+                    <p class="adminManageGeneralText">Manage general card issuance, cashier top-ups, block lost cards, and monitor active bus terminals.</p>
+                </div>
+                <div class="adminIssueNewPanel">
+                    <button onclick="openRegisterCardModal()" class="adminIssueNewBtn">
+                        <i data-lucide="user-plus" class="icon"></i>
+                        <span>Issue New Bus Link Card</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Stats Row -->
+            <div class="adminActiveBusPanel">
+                <div class="panelCompact">
+                    <div class="adminActiveBusPanel2">
+                        <span>ACTIVE BUS LINK CARDS</span>
+                        <i data-lucide="credit-card" class="adminIconCreditCard"></i>
+                    </div>
+                    <div class="adminStatActiveCards" id="admin-stat-active-cards">1,842</div>
+                    <div class="adminIncludePsuPanel">Include 1,210 PSU Student IDs</div>
+                </div>
+
+                <div class="panelCompact">
+                    <div class="adminActiveBusPanel2">
+                        <span>TODAY'S FARE REVENUE</span>
+                        <i data-lucide="banknote" class="adminIconBanknote"></i>
+                    </div>
+                    <div class="adminStatRevenue" id="admin-stat-revenue">₱42,950.00</div>
+                    <div class="adminVsYesterdayPanel">+14% vs yesterday</div>
+                </div>
+
+                <div class="panelCompact">
+                    <div class="adminActiveBusPanel2">
+                        <span>DISPATCHED BUSES</span>
+                        <i data-lucide="bus" class="adminIconBus"></i>
+                    </div>
+                    <div class="adminStatActiveCards" id="admin-stat-active-buses">12 Units</div>
+                    <div class="adminIncludePsuPanel">Goa - Naga Corridor</div>
+                </div>
+
+                <div class="panelCompact">
+                    <div class="adminActiveBusPanel2">
+                        <span>PENDING SYNC LOGS</span>
+                        <i data-lucide="refresh-cw" class="adminIconRefreshCw"></i>
+                    </div>
+                    <div class="adminStatPendingSync" id="admin-stat-pending-sync">0 Offline</div>
+                    <div class="adminIncludePsuPanel">All bus devices synced</div>
+                </div>
+            </div>
+
+            <!-- Main Admin Grid -->
+            <div class="layoutGrid">
+
+                <!-- Card Database & Management Table -->
+                <div class="adminCardRegistryPanel">
+                    <div class="adminCardRegistryPanel2">
+                        <h3 class="adminCardRegistryTitle">Card Registry & Action Center</h3>
+                        <div class="adminPanel">
+                            <i data-lucide="search" class="adminIconSearch"></i>
+                            <input type="text" id="admin-card-search" oninput="renderAdminCards()" placeholder="Search UID or Cardholder..." class="adminCardSearch">
+                        </div>
+                    </div>
+
+                    <div class="tableScroll">
+                        <table class="adminCardUidTable">
+                            <thead class="tableHead">
+                                <tr>
+                                    <th class="tableHeadFirst">Card UID</th>
+                                    <th class="tableHeadCell">Type</th>
+                                    <th class="tableHeadCell">Cardholder</th>
+                                    <th class="tableHeadCell">Balance</th>
+                                    <th class="tableHeadCell">Status</th>
+                                    <th class="adminActionsCol">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tableBody" id="admin-card-table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cashier Desk Deposit & Fleet Unit Monitor -->
+                <div class="adminOutpostCashierPanel">
+
+                    <!-- Outpost Cashier Desk -->
+                    <div class="panel">
+                        <h3 class="adminOutpostCashierTitle">
+                            <i data-lucide="wallet" class="adminIconBanknote"></i>
+                            <span>Outpost Cashier Top-Up Terminal</span>
+                        </h3>
+                        <form onsubmit="handleAdminTopup(event)" class="formStack">
+                            <div>
+                                <label class="fieldLabelSm">Target Card UID / Student ID</label>
+                                <input type="text" id="admin-topup-card-id" required placeholder="e.g. BL-1002 or PSU-2026-0881" class="adminTopupCardId">
+                            </div>
+                            <div>
+                                <label class="fieldLabelSm">Deposit Amount (₱)</label>
+                                <input type="number" id="admin-topup-amount" min="10" max="5000" required placeholder="Amount in PHP" class="adminTopupAmount">
+                            </div>
+                            <button type="submit" class="adminProcessCashBtn">
+                                Process Cash Top-Up Deposit
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Fleet Bus Unit Status -->
+                    <div class="panel">
+                        <h3 class="adminOutpostCashierTitle">
+                            <i data-lucide="bus" class="adminIconBus"></i>
+                            <span>Bus Fleet & Assigned Personnel</span>
+                        </h3>
+                        <div class="adminFleetList" id="admin-fleet-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-register-card" class="modalOverlay isHidden">
+        <div class="registerCardModalIssueNewPanel">
+            <h3 class="registerCardModalIssueNewTitle">Issue New Bus Link Card</h3>
+            <form onsubmit="handleRegisterCard(event)" class="registerCardModalCardUidForm">
+                <div>
+                    <label class="fieldLabel">Card UID</label>
+                    <input type="text" id="new-card-uid" required placeholder="e.g. BL-2001" class="registerCardModalNewCardUid">
+                </div>
+                <div>
+                    <label class="fieldLabel">Cardholder Name</label>
+                    <input type="text" id="new-card-name" required placeholder="Full Name" class="registerCardModalNewCardName">
+                </div>
+                <div>
+                    <label class="fieldLabel">Initial Balance (₱)</label>
+                    <input type="number" id="new-card-balance" min="0" value="100" required class="registerCardModalNewCardName">
+                </div>
+                <div class="registerCardModalCancelPanel">
+                    <button type="button" onclick="closeModal('modal-register-card')" class="registerCardModalCancelBtn">Cancel</button>
+                    <button type="submit" class="registerCardModalIssueCardBtn">Issue Card</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

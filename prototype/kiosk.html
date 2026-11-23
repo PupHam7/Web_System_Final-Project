@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - Terminal Kiosk</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="appGoaCentralMain">
+
+        <div id="toast-container" class="appToastContainer"></div>
+
+        <div class="appRoleBanner">
+            <div>
+                <span class="roleAreViewingText">You are viewing as</span>
+                <div class="rolePanel">Terminal Kiosk <span class="roleText">· Passenger at the terminal</span></div>
+                <p class="roleText2">Tap a card, check the balance, deposit cash, and view schedules.</p>
+            </div>
+            <a href="index.html" class="roleSwitchRoleBtn">← System map</a>
+        </div>
+
+        <section id="view-kiosk" class="viewPanel">
+            <div class="kioskGoaCentralPanel">
+                <div class="kioskGoaCentralPanel2">
+                    <div>
+                        <div class="kioskGoaCentralPanel3">
+                            <i data-lucide="map-pin" class="iconSm"></i>
+                            <span>Goa Central Bus Terminal Kiosk #01</span>
+                        </div>
+                        <h1 class="kioskSelfServiceTitle">Self-Service Bus Link Station</h1>
+                        <p class="kioskTapCardText">Tap your Card or PSU Student ID to check balance, top-up, or calculate route fares.</p>
+                    </div>
+
+                    <!-- RFID Simulator Selector -->
+                    <div class="kioskSimulateCardPanel">
+                        <div class="mutedSmall">
+                            <span class="kioskSimulateCardText">Simulate Card Tap:</span>
+                            <div class="kioskTapPsuPanel">
+                                <button onclick="simulateTap('psu')" class="kioskTapPsuBtn">
+                                    <i data-lucide="graduation-cap" class="iconSm"></i>
+                                    <span>Tap PSU Student ID</span>
+                                </button>
+                                <button onclick="simulateTap('general')" class="kioskTapStandardBtn">
+                                    <i data-lucide="credit-card" class="iconSm"></i>
+                                    <span>Tap Standard Card</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kiosk Content Grid -->
+            <div class="layoutGrid">
+
+                <!-- Card Tap & Status Box -->
+                <div class="kioskRfidTouchpadPanel">
+                    <div class="kioskRfidTouchpadPanel2">
+                        <h2 class="kioskRfidTouchpadTitle">RFID Touchpad Zone</h2>
+                        <p class="kioskPlacePhysicalText">Place physical card or smartphone pass here</p>
+
+                        <!-- Card Visual Target -->
+                        <div id="kiosk-rfid-zone" class="kioskRfidZone hoverGroup">
+                            <div class="kioskPanel"></div>
+                            <i data-lucide="nfc" class="kioskIconNfc"></i>
+                            <span class="kioskPlaceCardText">Place Card Here</span>
+                            <span class="kioskAcceptsBusText">Accepts Bus Link & PSU Student Cards</span>
+                        </div>
+                    </div>
+
+                    <!-- Card Reader State Output -->
+                    <div id="kiosk-card-display" class="kioskCardDisplay">
+                        <div class="kioskCardStatusPanel">
+                            <span class="kioskCardStatusText">CARD STATUS</span>
+                            <span id="kiosk-card-type-badge" class="kioskBadgeIdle">No Card Scanned</span>
+                        </div>
+                        <div class="kioskCardIdPanel">
+                            <div class="kioskCardIdPanel2">
+                                <span class="kioskCardIdText">Card ID / UID:</span>
+                                <span id="kiosk-card-id" class="kioskCardId">---- ---- ----</span>
+                            </div>
+                            <div class="kioskCardIdPanel2">
+                                <span class="kioskCardIdText">Holder Name:</span>
+                                <span id="kiosk-holder-name" class="kioskHolderName">--</span>
+                            </div>
+                            <div class="kioskCurrentBalancePanel">
+                                <span class="kioskCardIdText">Current Balance:</span>
+                                <span id="kiosk-balance" class="kioskBalance">₱0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deposit Money Module -->
+                    <div class="kioskTopUpPanel">
+                        <label class="kioskTopUpLabel">Top-Up Card Deposit (Cash/Bill Acceptor)</label>
+                        <div class="kioskPanel2">
+                            <button onclick="kioskAddCash(50)" class="kioskBtn">₱50</button>
+                            <button onclick="kioskAddCash(100)" class="kioskBtn">₱100</button>
+                            <button onclick="kioskAddCash(200)" class="kioskBtn">₱200</button>
+                            <button onclick="kioskAddCash(500)" class="kioskBtn">₱500</button>
+                        </div>
+                        <button onclick="confirmKioskDeposit()" class="kioskCompleteCashBtn">
+                            <i data-lucide="arrow-up-right-square" class="icon"></i>
+                            <span>Complete Cash Top-Up</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fare Matrix & Trip Schedule Lookup -->
+                <div class="kioskOriginDestinationPanel">
+
+                    <!-- Fare Calculator -->
+                    <div class="panel">
+                        <div class="sectionHeader">
+                            <div class="inlineRow">
+                                <i data-lucide="calculator" class="kioskIconCalculator"></i>
+                                <h3 class="kioskOriginDestinationTitle">Origin-Destination Fare Matrix Calculator</h3>
+                            </div>
+                            <span class="kioskOfficialFareText">Official Fare Matrix 2026</span>
+                        </div>
+
+                        <div class="kioskOriginTerminalPanel">
+                            <div>
+                                <label class="fieldLabelSpaced">Origin Terminal / Stop</label>
+                                <select id="kiosk-origin" onchange="calculateKioskFare()" class="kioskOrigin">
+                                    <option value="Goa">Goa (Central Terminal)</option>
+                                    <option value="Tigaon">Tigaon</option>
+                                    <option value="Sangay">Sangay</option>
+                                    <option value="Pili">Pili Terminal</option>
+                                    <option value="Naga">Naga City Hub</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="fieldLabelSpaced">Destination Terminal / Stop</label>
+                                <select id="kiosk-destination" onchange="calculateKioskFare()" class="kioskOrigin">
+                                    <option value="Naga" selected>Naga City Hub</option>
+                                    <option value="Pili">Pili Terminal</option>
+                                    <option value="Sangay">Sangay</option>
+                                    <option value="Tigaon">Tigaon</option>
+                                    <option value="Goa">Goa (Central Terminal)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Calculation Output Card -->
+                        <div class="kioskEstimatedDistancePanel">
+                            <div>
+                                <span class="kioskEstimatedDistanceText">Estimated Distance</span>
+                                <span id="kiosk-distance" class="kioskDistance">48.5 km</span>
+                            </div>
+                            <div>
+                                <span class="kioskEstimatedDistanceText">Standard Fare</span>
+                                <span id="kiosk-standard-fare" class="kioskDistance">₱85.00</span>
+                            </div>
+                            <div class="kioskPsuStudentPanel">
+                                <span class="kioskPsuStudentText">PSU Student Rate</span>
+                                <span id="kiosk-student-fare" class="kioskStudentFare">₱68.00</span>
+                                <span class="kioskDiscountAutoText">(20% Discount Auto-Applied)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bus Schedule & Dispatch Monitor -->
+                    <div class="panel">
+                        <div class="sectionHeader">
+                            <div class="inlineRow">
+                                <i data-lucide="clock" class="kioskIconClock"></i>
+                                <h3 class="kioskOriginDestinationTitle">Live Bus Schedules (Partido Corridor)</h3>
+                            </div>
+                            <span class="kioskRealTimeText">
+                                <span class="kioskText"></span>
+                                <span>Real-time Updates</span>
+                            </span>
+                        </div>
+
+                        <div class="tableScroll">
+                            <table class="kioskBusUnitTable">
+                                <thead class="tableHead">
+                                    <tr>
+                                        <th class="tableHeadFirst">Bus Unit</th>
+                                        <th class="tableHeadCell">Route</th>
+                                        <th class="tableHeadCell">First Trip</th>
+                                        <th class="tableHeadCell">Last Trip</th>
+                                        <th class="tableHeadLast">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="kioskScheduleTable" id="kiosk-schedule-table">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

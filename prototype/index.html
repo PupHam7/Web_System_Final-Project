@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - System Map</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="mapPage">
+        <div class="mapWrap">
+            <div class="mapHeader">
+                <h1 class="mapTitle">Bus Link System Map</h1>
+                <p class="mapSubtitle">Click a part of the system to open only that interface.</p>
+            </div>
+            <div class="mapBoard">
+                <a href="kiosk.html" class="mapNode">
+                    <span class="mapIcon"><i data-lucide="monitor"></i></span>
+                    <span class="mapLabel">Terminal / Kiosk</span>
+                    <span class="mapRole">Terminal</span>
+                    <span class="mapOpen">Open kiosk →</span>
+                </a>
+                <a href="passenger.html" class="mapNode">
+                    <span class="mapPair"><svg viewBox="0 0 40 60" class="mapFigure"><circle cx="20" cy="9" r="7"/><path d="M20 16v20M4 24h32M20 36L6 56M20 36l14 20"/></svg><svg viewBox="0 0 30 56" class="mapPhone"><rect x="2" y="2" width="26" height="52" rx="4"/><rect x="6" y="8" width="18" height="34" rx="1"/><circle cx="15" cy="48" r="2"/></svg></span>
+                    <span class="mapLabel">Passenger Phone / App</span>
+                    <span class="mapRole">Passenger / Student</span>
+                    <span class="mapOpen">Open passenger app →</span>
+                </a>
+                <a href="university.html" class="mapNode">
+                    <span class="mapIcon"><i data-lucide="graduation-cap"></i></span>
+                    <span class="mapLabel">University Accountant</span>
+                    <span class="mapRole">Deposits for students without an e-wallet</span>
+                    <span class="mapOpen">Open accountant desk →</span>
+                </a>
+                <a href="admin.html" class="mapNode">
+                    <span class="mapIcon"><i data-lucide="shield-check"></i></span>
+                    <span class="mapLabel">Bus Operator Admin</span>
+                    <span class="mapRole">Cards, fleet, and sync</span>
+                    <span class="mapOpen">Open admin →</span>
+                </a>
+                <a href="conductor.html" class="mapNode">
+                    <span class="mapPair"><span class="mapIcon mapBus"><i data-lucide="bus"></i></span><svg viewBox="0 0 80 20" class="mapArrow"><path d="M0 10h70M62 4l10 6-10 6"/></svg><svg viewBox="0 0 40 60" class="mapFigure"><circle cx="20" cy="9" r="7"/><path d="M20 16v20M4 24h32M20 36L6 56M20 36l14 20"/></svg><svg viewBox="0 0 30 56" class="mapPhone"><rect x="2" y="2" width="26" height="52" rx="4"/><rect x="6" y="8" width="18" height="34" rx="1"/><circle cx="15" cy="48" r="2"/></svg></span>
+                    <span class="mapLabel">Conductor / Conductor POS</span>
+                    <span class="mapRole">On the bus</span>
+                    <span class="mapOpen">Open conductor POS →</span>
+                </a>
+            </div>
+            <p class="mapHint">Each interface is its own page and they share the same demo data. <button onclick="resetDemoData()" class="mapReset">Reset demo data</button></p>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('load', () => lucide.createIcons());
+        function resetDemoData() {
+            try { localStorage.removeItem('busLinkState'); } catch (e) {}
+            alert('Demo data reset. Every interface starts from the original balances and records.');
+        }
+    </script>
+</body>
+</html>

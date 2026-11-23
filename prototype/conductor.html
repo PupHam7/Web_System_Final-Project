@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - Conductor POS</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="appGoaCentralMain">
+
+        <div id="toast-container" class="appToastContainer"></div>
+
+        <div class="appRoleBanner">
+            <div>
+                <span class="roleAreViewingText">You are viewing as</span>
+                <div class="rolePanel">Conductor POS <span class="roleText">· Conductor on board</span></div>
+                <p class="roleText2">Scan cards or QR tickets and deduct fares, with offline mode.</p>
+            </div>
+            <a href="index.html" class="roleSwitchRoleBtn">← System map</a>
+        </div>
+
+        <section id="view-conductor" class="viewPanel">
+            <div class="conductorBusLinkPanel">
+                <!-- Mobile POS Shell Simulation -->
+                <div class="conductorBusLinkPanel2">
+
+                    <!-- POS Device Top Status Bar -->
+                    <div class="conductorBusLinkPanel3">
+                        <div class="inlineRow">
+                            <span class="conductorText"></span>
+                            <span class="conductorBusLinkText">BUS LINK POS v3.2</span>
+                        </div>
+                        <div class="conductorOnlineModePanel">
+                            <!-- Offline/Online Toggle Button -->
+                            <button onclick="toggleOfflineMode()" id="pos-offline-toggle" class="syncToggleOnline">
+                                <i data-lucide="wifi" class="conductorIconWifi"></i>
+                                <span id="pos-net-status-text">ONLINE MODE</span>
+                            </button>
+                            <span class="conductorText2">|</span>
+                            <span class="conductorBusText">Bus #04</span>
+                        </div>
+                    </div>
+
+                    <!-- Offline Sync Status Bar -->
+                    <div id="pos-sync-bar" class="conductorPosSyncBar isHidden">
+                        <div class="inlineRow">
+                            <i data-lucide="database-backup" class="conductorIconDatabaseBackup"></i>
+                            <span>Offline Mode: Storing in Local SQLite Cache</span>
+                        </div>
+                        <span id="pos-pending-count" class="conductorPosPendingCount">0 Pending Logs</span>
+                    </div>
+
+                    <!-- Bus Route & Trip Configuration -->
+                    <div class="conductorCurrentStopPanel">
+                        <div class="conductorCurrentStopPanel2">
+                            <div>
+                                <label class="fieldLabel">Current Stop (Origin)</label>
+                                <select id="conductor-origin" onchange="calculateConductorFare()" class="conductorOrigin">
+                                    <option value="Goa">Goa Terminal</option>
+                                    <option value="Tigaon">Tigaon Stop</option>
+                                    <option value="Sangay">Sangay</option>
+                                    <option value="Pili">Pili Terminal</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="fieldLabel">Passenger Target Destination</label>
+                                <select id="conductor-destination" onchange="calculateConductorFare()" class="conductorOrigin">
+                                    <option value="Naga" selected>Naga City Hub</option>
+                                    <option value="Pili">Pili Terminal</option>
+                                    <option value="Sangay">Sangay</option>
+                                    <option value="Tigaon">Tigaon Stop</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="conductorCalculatedFarePanel">
+                            <span class="conductorCalculatedFareText">Calculated Fare:</span>
+                            <div class="conductorRegularPanel">
+                                <span id="pos-fare-regular" class="conductorPosFareRegular">Regular: ₱85.00</span>
+                                <span id="pos-fare-student" class="conductorPosFareStudent">PSU Discount: ₱68.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tap Action & Reader Zone -->
+                    <div class="conductorConductorTapPanel">
+                        <h4 class="conductorConductorTapTitle">Conductor Tap Scanner</h4>
+
+                        <div class="conductorScanPsuPanel">
+                            <button onclick="conductorScan('psu')" class="conductorScanPsuBtn">
+                                <i data-lucide="graduation-cap" class="icon"></i>
+                                <span>Scan PSU Student ID</span>
+                            </button>
+                            <button onclick="conductorScan('general')" class="conductorScanStandardBtn">
+                                <i data-lucide="credit-card" class="icon"></i>
+                                <span>Scan Standard Card</span>
+                            </button>
+                        </div>
+
+                        <!-- Ticket Reference QR Code Verifier -->
+                        <div class="conductorVerifyMobilePanel">
+                            <span class="conductorVerifyMobileText">Verify Mobile App E-Ticket Reference</span>
+                            <div class="conductorVerifyPanel">
+                                <input type="text" id="pos-qr-input" placeholder="Enter Ref ID (e.g. REF-9021)" class="conductorPosQrInput">
+                                <button onclick="verifyQRTicket()" class="conductorVerifyBtn">Verify</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- POS Terminal Transaction Result Screen -->
+                    <div id="pos-result-screen" class="posResultIdle">
+                        <div class="conductorAwaitingTapPanel">Awaiting Tap or Scan Input...</div>
+                    </div>
+
+                    <!-- Local Storage Logs Counter -->
+                    <div class="conductorTerminalIdPanel">
+                        <span>Terminal ID: POS-BUS04-GOA</span>
+                        <button onclick="forcePOSSync()" class="conductorForceSyncBtn">
+                            <i data-lucide="refresh-cw" class="conductorIconWifi"></i>
+                            <span>Force Sync Local Database</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

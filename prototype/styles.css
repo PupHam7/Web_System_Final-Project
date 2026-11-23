@@ -1,0 +1,3644 @@
+/* Bus Link styles: plain CSS with project-based camelCase class names, prefixed by section (kiosk..., admin..., conductor..., passenger..., university...). */
+/* Reset / base styles */
+*,::before,::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
+html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+body {
+    margin: 0;
+    line-height: inherit;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+h1,h2,h3,h4,h5,h6,p,pre,blockquote,dl,dd,hr,figure {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+b,strong {
+    font-weight: bolder;
+}
+
+code,kbd,samp,pre {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    font-size: 1em;
+}
+
+small {
+    font-size: 80%;
+}
+
+table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+button,input,optgroup,select,textarea {
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+button,select {
+    text-transform: none;
+}
+
+button,[type=button],[type=reset],[type=submit] {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+ol,ul,menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input::placeholder,textarea::placeholder {
+    opacity: 1;
+    color: #9ca3af;
+}
+
+button,[role=button] {
+    cursor: pointer;
+}
+
+:disabled {
+    cursor: default;
+}
+
+img,svg,video,canvas,audio,iframe,embed,object {
+    display: block;
+    vertical-align: middle;
+}
+
+img,video {
+    max-width: 100%;
+    height: auto;
+}
+
+[hidden] {
+    display: none;
+}
+
+@keyframes ping {
+    75%,100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .5;
+    }
+}
+
+/* ===== Components ===== */
+/* ----- Top navigation ----- */
+.topbarBusLinkHeader {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    box-shadow: 0 4px 6px -1px var(--sc,rgba(0,0,0,0.1)),0 2px 4px -2px var(--sc,rgba(0,0,0,0.1));
+}
+
+.topbarBusLinkPanel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width:640px) {
+    .topbarBusLinkPanel {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width:1024px) {
+    .topbarBusLinkPanel {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.topbarBusLinkPanel2 {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbarBusLinkPanel3 {
+    display: flex;
+    align-items: center;
+}
+
+.topbarBusLinkPanel3>:not([hidden])~:not([hidden]) {
+    margin-left: 0.75rem;
+}
+
+.topbarPanel {
+    border-radius: .75rem;
+    background-color: #2563eb;
+    padding: 0.5rem;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+    --sc: rgba(59,130,246,0.3);
+}
+
+.topbarIconBus {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.inlineRow {
+    display: flex;
+    align-items: center;
+}
+
+.inlineRow>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.topbarBusLinkText {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    color: #ffffff;
+}
+
+.topbarPsuEcosystemText {
+    border-radius: .25rem;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.3);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #60a5fa;
+}
+
+.topbarOfflineFirstText {
+    display: none;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+@media (min-width:640px) {
+    .topbarOfflineFirstText {
+        display: block;
+    }
+}
+
+.topbarServerOnlinePanel {
+    display: none;
+    align-items: center;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.topbarServerOnlinePanel>:not([hidden])~:not([hidden]) {
+    margin-left: 1rem;
+}
+
+@media (min-width:768px) {
+    .topbarServerOnlinePanel {
+        display: flex;
+    }
+}
+
+.syncDotOnline {
+    height: 0.625rem;
+    width: 0.625rem;
+    animation: ping 1s cubic-bezier(0,0,.2,1) infinite;
+    border-radius: 9999px;
+    background-color: #10b981;
+}
+
+.syncTextOnline {
+    font-weight: 500;
+    color: #34d399;
+}
+
+.topbarText {
+    color: #475569;
+}
+
+.muted {
+    color: #94a3b8;
+}
+
+.topbarEnrolledText {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #e2e8f0;
+}
+
+.icon {
+    height: 1rem;
+    width: 1rem;
+}
+
+/* ----- Terminal kiosk ----- */
+.viewPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 1.5rem;
+}
+
+.kioskGoaCentralPanel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.3);
+    background-image: linear-gradient(to right,var(--g-stops));
+    --g-from: rgba(30,58,138,0.4);
+    --g-to: rgba(30,58,138,0);
+    --g-stops: var(--g-from),var(--g-to);
+    --g-to: #0f172a;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.kioskGoaCentralPanel2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (min-width:768px) {
+    .kioskGoaCentralPanel2 {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.kioskGoaCentralPanel3 {
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(96,165,250,0.3);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #93c5fd;
+}
+
+.kioskGoaCentralPanel3>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.iconSm {
+    height: 0.875rem;
+    width: 0.875rem;
+}
+
+.kioskSelfServiceTitle {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -.025em;
+    color: #ffffff;
+}
+
+.kioskTapCardText {
+    margin-top: 0.25rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #94a3b8;
+}
+
+.kioskSimulateCardPanel {
+    display: flex;
+    align-items: center;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1rem;
+    box-shadow: inset 0 2px 4px 0 var(--sc,rgba(0,0,0,0.05));
+}
+
+.kioskSimulateCardPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 1rem;
+}
+
+.mutedSmall {
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.kioskSimulateCardText {
+    margin-bottom: 0.25rem;
+    display: block;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.kioskTapPsuPanel {
+    display: flex;
+}
+
+.kioskTapPsuPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.kioskTapPsuBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.4);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #fde047;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.kioskTapPsuBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.375rem;
+}
+
+.kioskTapPsuBtn:hover {
+    background-color: rgba(234,179,8,0.3);
+}
+
+.kioskTapStandardBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.4);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #93c5fd;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.kioskTapStandardBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.375rem;
+}
+
+.kioskTapStandardBtn:hover {
+    background-color: rgba(59,130,246,0.3);
+}
+
+.layoutGrid {
+    display: grid;
+    grid-template-columns: repeat(1,minmax(0,1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width:1024px) {
+    .layoutGrid {
+        grid-template-columns: repeat(12,minmax(0,1fr));
+    }
+}
+
+.kioskRfidTouchpadPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px var(--sc,rgba(0,0,0,0.1)),0 8px 10px -6px var(--sc,rgba(0,0,0,0.1));
+}
+
+@media (min-width:1024px) {
+    .kioskRfidTouchpadPanel {
+        grid-column: span 5 / span 5;
+    }
+}
+
+.kioskRfidTouchpadPanel2 {
+    text-align: center;
+}
+
+.kioskRfidTouchpadTitle {
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.kioskPlacePhysicalText {
+    margin-bottom: 1.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.kioskRfidZone {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    height: 10rem;
+    width: 16rem;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 1rem;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #334155;
+    background-image: linear-gradient(to bottom right,var(--g-stops));
+    --g-from: #0f172a;
+    --g-to: rgba(15,23,42,0);
+    --g-stops: var(--g-from),var(--g-to);
+    --g-to: #020617;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.kioskRfidZone:hover {
+    border-color: #3b82f6;
+}
+
+.kioskPanel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 1rem;
+    background-color: rgba(59,130,246,0.05);
+}
+
+.kioskIconNfc {
+    margin-bottom: 0.5rem;
+    height: 3rem;
+    width: 3rem;
+    color: #60a5fa;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.hoverGroup:hover .kioskIconNfc {
+    transform: scale(1.1);
+}
+
+.kioskPlaceCardText {
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.kioskAcceptsBusText {
+    margin-top: 0.25rem;
+    font-size: 10px;
+    color: #64748b;
+}
+
+.kioskCardDisplay {
+    margin-top: 1.5rem;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 1rem;
+}
+
+.kioskCardStatusPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-bottom: 0.75rem;
+}
+
+.kioskCardStatusText {
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.kioskBadgeIdle {
+    border-radius: 9999px;
+    background-color: #1e293b;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.kioskCardIdPanel {
+    margin-top: 0.75rem;
+}
+
+.kioskCardIdPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 0.5rem;
+}
+
+.kioskCardIdPanel2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.kioskCardIdText {
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.kioskCardId {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #e2e8f0;
+}
+
+.kioskHolderName {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.kioskCurrentBalancePanel {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.5rem;
+}
+
+.kioskBalance {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+    color: #34d399;
+}
+
+.kioskTopUpPanel {
+    margin-top: 1rem;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 1rem;
+}
+
+.kioskTopUpLabel {
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.kioskPanel2 {
+    margin-bottom: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 0.5rem;
+}
+
+.kioskBtn {
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #334155;
+    background-color: #0f172a;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.kioskBtn:hover {
+    background-color: #1e293b;
+}
+
+.kioskCompleteCashBtn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: .75rem;
+    background-color: #059669;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+    --sc: rgba(5,150,105,0.2);
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.kioskCompleteCashBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.kioskCompleteCashBtn:hover {
+    background-color: #10b981;
+}
+
+.kioskOriginDestinationPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 1.5rem;
+}
+
+@media (min-width:1024px) {
+    .kioskOriginDestinationPanel {
+        grid-column: span 7 / span 7;
+    }
+}
+
+.panel {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px var(--sc,rgba(0,0,0,0.1)),0 8px 10px -6px var(--sc,rgba(0,0,0,0.1));
+}
+
+.sectionHeader {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.kioskIconCalculator {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #60a5fa;
+}
+
+.kioskOriginDestinationTitle {
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.kioskOfficialFareText {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: #334155;
+    background-color: #1e293b;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #cbd5e1;
+}
+
+.kioskOriginTerminalPanel {
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(1,minmax(0,1fr));
+    gap: 1rem;
+}
+
+@media (min-width:640px) {
+    .kioskOriginTerminalPanel {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+.fieldLabelSpaced {
+    margin-bottom: 0.375rem;
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.kioskOrigin {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #334155;
+    background-color: #0f172a;
+    padding: 0.75rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #e2e8f0;
+}
+
+.kioskOrigin:focus {
+    border-color: #3b82f6;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.kioskEstimatedDistancePanel {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 1rem;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: rgba(15,23,42,0.9);
+    padding: 1rem;
+    text-align: center;
+}
+
+.kioskEstimatedDistanceText {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.kioskDistance {
+    margin-top: 0.25rem;
+    display: block;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.kioskPsuStudentPanel {
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.3);
+    background-color: rgba(234,179,8,0.1);
+    padding: 0.25rem;
+}
+
+.kioskPsuStudentText {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #facc15;
+}
+
+.kioskStudentFare {
+    display: block;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 800;
+    color: #fde047;
+}
+
+.kioskDiscountAutoText {
+    font-size: 9px;
+    color: rgba(250,204,21,0.8);
+}
+
+.kioskIconClock {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #34d399;
+}
+
+.kioskRealTimeText {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #34d399;
+}
+
+.kioskRealTimeText>:not([hidden])~:not([hidden]) {
+    margin-left: 0.25rem;
+}
+
+.kioskText {
+    height: 0.5rem;
+    width: 0.5rem;
+    animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite;
+    border-radius: 9999px;
+    background-color: #34d399;
+}
+
+.tableScroll {
+    overflow-x: auto;
+}
+
+.kioskBusUnitTable {
+    width: 100%;
+    text-align: left;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #cbd5e1;
+}
+
+.tableHead {
+    background-color: #0f172a;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.tableHeadFirst {
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    padding: 0.75rem;
+}
+
+.tableHeadCell {
+    padding: 0.75rem;
+}
+
+.tableHeadLast {
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    padding: 0.75rem;
+}
+
+.kioskScheduleTable>:not([hidden])~:not([hidden]) {
+    border-top-width: 1px;
+    border-bottom-width: 0;
+    border-color: rgba(30,41,59,0.6);
+}
+
+.tableRow:hover {
+    background-color: rgba(15,23,42,0.5);
+}
+
+.kioskCell {
+    padding: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.kioskCell2 {
+    padding: 0.75rem;
+}
+
+.kioskCell3 {
+    padding: 0.75rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #94a3b8;
+}
+
+.kioskBadgePsu {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.3);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #fde047;
+}
+
+.kioskBadgeGeneral {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.3);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #93c5fd;
+}
+
+.statusBadge {
+    border-radius: .25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.statusBadgeBoarding {
+    background-color: rgba(16,185,129,0.2);
+    color: #6ee7b7;
+}
+
+.statusBadgeDefault {
+    background-color: rgba(59,130,246,0.2);
+    color: #93c5fd;
+}
+
+/* ----- Bus operator admin ----- */
+.adminTerminalOutpostPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+}
+
+@media (min-width:768px) {
+    .adminTerminalOutpostPanel {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.adminTerminalOutpostTitle {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.adminTerminalOutpostTitle>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.adminIconShieldCheck {
+    height: 1.75rem;
+    width: 1.75rem;
+    color: #3b82f6;
+}
+
+.adminManageGeneralText {
+    margin-top: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.adminIssueNewPanel {
+    display: flex;
+}
+
+.adminIssueNewPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.75rem;
+}
+
+.adminIssueNewBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .75rem;
+    background-color: #2563eb;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+    --sc: rgba(37,99,235,0.2);
+}
+
+.adminIssueNewBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.adminIssueNewBtn:hover {
+    background-color: #3b82f6;
+}
+
+.adminActiveBusPanel {
+    display: grid;
+    grid-template-columns: repeat(1,minmax(0,1fr));
+    gap: 1rem;
+}
+
+@media (min-width:640px) {
+    .adminActiveBusPanel {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media (min-width:1024px) {
+    .adminActiveBusPanel {
+        grid-template-columns: repeat(4,minmax(0,1fr));
+    }
+}
+
+.panelCompact {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.25rem;
+}
+
+.adminActiveBusPanel2 {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.adminIconCreditCard {
+    height: 1rem;
+    width: 1rem;
+    color: #60a5fa;
+}
+
+.adminStatActiveCards {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.adminIncludePsuPanel {
+    margin-top: 0.25rem;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.adminIconBanknote {
+    height: 1rem;
+    width: 1rem;
+    color: #34d399;
+}
+
+.adminStatRevenue {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 900;
+    color: #34d399;
+}
+
+.adminVsYesterdayPanel {
+    margin-top: 0.25rem;
+    font-size: 11px;
+    color: rgba(16,185,129,0.8);
+}
+
+.adminIconBus {
+    height: 1rem;
+    width: 1rem;
+    color: #fbbf24;
+}
+
+.adminIconRefreshCw {
+    height: 1rem;
+    width: 1rem;
+    color: #c084fc;
+}
+
+.adminStatPendingSync {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 900;
+    color: #c084fc;
+}
+
+.adminCardRegistryPanel {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px var(--sc,rgba(0,0,0,0.1)),0 8px 10px -6px var(--sc,rgba(0,0,0,0.1));
+}
+
+@media (min-width:1024px) {
+    .adminCardRegistryPanel {
+        grid-column: span 8 / span 8;
+    }
+}
+
+.adminCardRegistryPanel2 {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (min-width:640px) {
+    .adminCardRegistryPanel2 {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.adminCardRegistryTitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.adminPanel {
+    position: relative;
+    width: 100%;
+}
+
+@media (min-width:640px) {
+    .adminPanel {
+        width: 16rem;
+    }
+}
+
+.adminIconSearch {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    height: 1rem;
+    width: 1rem;
+    color: #64748b;
+}
+
+.adminCardSearch {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.75rem;
+    padding-left: 2.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.adminCardSearch:focus {
+    border-color: #3b82f6;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.adminCardUidTable {
+    width: 100%;
+    text-align: left;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.adminActionsCol {
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    padding: 0.75rem;
+    text-align: right;
+}
+
+.tableBody>:not([hidden])~:not([hidden]) {
+    border-top-width: 1px;
+    border-bottom-width: 0;
+    border-color: rgba(30,41,59,0.7);
+}
+
+.adminOutpostCashierPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 1.5rem;
+}
+
+@media (min-width:1024px) {
+    .adminOutpostCashierPanel {
+        grid-column: span 4 / span 4;
+    }
+}
+
+.adminOutpostCashierTitle {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.adminOutpostCashierTitle>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.formStack>:not([hidden])~:not([hidden]) {
+    margin-top: 0.75rem;
+}
+
+.fieldLabelSm {
+    margin-bottom: 0.25rem;
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.adminTopupCardId {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.adminTopupAmount {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.adminProcessCashBtn {
+    width: 100%;
+    border-radius: .75rem;
+    background-color: #059669;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.adminProcessCashBtn:hover {
+    background-color: #10b981;
+}
+
+.adminFleetList>:not([hidden])~:not([hidden]) {
+    margin-top: 0.75rem;
+}
+
+.adminCell {
+    padding: 0.75rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.adminCell2 {
+    padding: 0.75rem;
+}
+
+.adminCell3 {
+    padding: 0.75rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.adminCell4 {
+    padding: 0.75rem;
+    font-weight: 700;
+    color: #34d399;
+}
+
+.adminCell5 {
+    padding: 0.75rem;
+    text-align: right;
+}
+
+.adminCell5>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.adminBtn {
+    border-radius: .25rem;
+    border-width: 1px;
+    border-color: #334155;
+    background-color: #0f172a;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 11px;
+    color: #cbd5e1;
+}
+
+.adminBtn:hover {
+    background-color: #1e293b;
+}
+
+.adminPanel2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.adminText {
+    display: block;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.adminConductorText {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.adminPanel3 {
+    text-align: right;
+}
+
+.adminText2 {
+    display: block;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.adminText3 {
+    border-radius: .25rem;
+    background-color: rgba(16,185,129,0.2);
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 600;
+    color: #34d399;
+}
+
+.cardTypeChip {
+    border-radius: .25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.cardTypeChipPsu {
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.3);
+    background-color: rgba(234,179,8,0.2);
+    color: #fde047;
+}
+
+.cardTypeChipGeneral {
+    background-color: rgba(59,130,246,0.2);
+    color: #93c5fd;
+}
+
+.cardStatusChip {
+    border-radius: 9999px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.cardStatusChipActive {
+    background-color: rgba(16,185,129,0.2);
+    color: #34d399;
+}
+
+.cardStatusChipBlocked {
+    background-color: rgba(239,68,68,0.2);
+    color: #f87171;
+}
+
+/* ----- Conductor POS ----- */
+.conductorBusLinkPanel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 42rem;
+}
+
+.conductorBusLinkPanel2 {
+    position: relative;
+    border-radius: 1.5rem;
+    border-width: 4px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.conductorBusLinkPanel3 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-bottom: 1rem;
+}
+
+.conductorText {
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 9999px;
+    background-color: #ef4444;
+}
+
+.conductorBusLinkText {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #cbd5e1;
+}
+
+.conductorOnlineModePanel {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.conductorOnlineModePanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.75rem;
+}
+
+.syncToggleOnline {
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(16,185,129,0.4);
+    background-color: rgba(16,185,129,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: #34d399;
+}
+
+.syncToggleOnline>:not([hidden])~:not([hidden]) {
+    margin-left: 0.25rem;
+}
+
+.conductorIconWifi {
+    height: 0.75rem;
+    width: 0.75rem;
+}
+
+.conductorText2 {
+    color: #64748b;
+}
+
+.conductorBusText {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #94a3b8;
+}
+
+.conductorPosSyncBar {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: rgba(245,158,11,0.3);
+    background-color: rgba(245,158,11,0.1);
+    padding: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #fcd34d;
+}
+
+.conductorIconDatabaseBackup {
+    height: 1rem;
+    width: 1rem;
+    color: #fbbf24;
+}
+
+.conductorPosPendingCount {
+    border-radius: .25rem;
+    background-color: rgba(245,158,11,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-weight: 700;
+    color: #fde68a;
+}
+
+.conductorCurrentStopPanel {
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 1rem;
+}
+
+.conductorCurrentStopPanel2 {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.fieldLabel {
+    margin-bottom: 0.25rem;
+    display: block;
+    color: #94a3b8;
+}
+
+.conductorOrigin {
+    width: 100%;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 0.5rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.conductorCalculatedFarePanel {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.conductorCalculatedFareText {
+    color: #94a3b8;
+}
+
+.conductorRegularPanel {
+    text-align: right;
+}
+
+.conductorPosFareRegular {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.conductorPosFareStudent {
+    margin-left: 0.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.conductorConductorTapPanel {
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: rgba(30,41,59,0.8);
+    background-color: rgba(15,23,42,0.5);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.conductorConductorTapTitle {
+    margin-bottom: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.conductorScanPsuPanel {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.conductorScanPsuPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.75rem;
+}
+
+.conductorScanPsuBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.4);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #fde047;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.conductorScanPsuBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.conductorScanPsuBtn:hover {
+    background-color: rgba(234,179,8,0.3);
+}
+
+.conductorScanStandardBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.4);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #93c5fd;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.conductorScanStandardBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.conductorScanStandardBtn:hover {
+    background-color: rgba(59,130,246,0.3);
+}
+
+.conductorVerifyMobilePanel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20rem;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.75rem;
+}
+
+.conductorVerifyMobileText {
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.conductorVerifyPanel {
+    display: flex;
+}
+
+.conductorVerifyPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.conductorPosQrInput {
+    width: 100%;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.conductorVerifyBtn {
+    border-radius: .5rem;
+    background-color: #9333ea;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.conductorVerifyBtn:hover {
+    background-color: #a855f7;
+}
+
+.posResultIdle {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 1rem;
+    text-align: center;
+}
+
+.conductorAwaitingTapPanel {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #64748b;
+}
+
+.conductorTerminalIdPanel {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 1rem;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.conductorForceSyncBtn {
+    display: flex;
+    align-items: center;
+    color: #60a5fa;
+}
+
+.conductorForceSyncBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.25rem;
+}
+
+.conductorForceSyncBtn:hover {
+    text-decoration-line: underline;
+}
+
+.conductorPanel {
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    border-radius: 9999px;
+    background-color: rgba(16,185,129,0.2);
+    padding: 0.5rem;
+    color: #34d399;
+}
+
+.conductorIconCheckCircle2 {
+    height: 2rem;
+    width: 2rem;
+}
+
+.conductorTitle {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 800;
+    letter-spacing: .025em;
+    color: #6ee7b7;
+}
+
+.conductorText3 {
+    margin-top: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: rgba(167,243,208,0.8);
+}
+
+.conductorPanel2 {
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    border-top-width: 1px;
+    border-color: rgba(6,95,70,0.6);
+    padding-top: 0.75rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #d1fae5;
+}
+
+.conductorRemainingBalText {
+    font-weight: 700;
+}
+
+.conductorPanel3 {
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    border-radius: 9999px;
+    background-color: rgba(239,68,68,0.2);
+    padding: 0.5rem;
+    color: #f87171;
+}
+
+.conductorTitle2 {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 800;
+    letter-spacing: .025em;
+    color: #fca5a5;
+}
+
+.conductorText4 {
+    margin-top: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: rgba(254,202,202,0.8);
+}
+
+.syncToggleOffline {
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(239,68,68,0.4);
+    background-color: rgba(239,68,68,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: #f87171;
+}
+
+.syncToggleOffline>:not([hidden])~:not([hidden]) {
+    margin-left: 0.25rem;
+}
+
+.syncDotOffline {
+    height: 0.625rem;
+    width: 0.625rem;
+    border-radius: 9999px;
+    background-color: #ef4444;
+}
+
+.syncTextOffline {
+    font-weight: 500;
+    color: #f87171;
+}
+
+.posResultSuccess {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: rgba(16,185,129,0.4);
+    background-color: rgba(2,44,34,0.8);
+    padding: 1rem;
+    text-align: center;
+}
+
+.posResultError {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: rgba(239,68,68,0.4);
+    background-color: rgba(69,10,10,0.8);
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ----- Passenger app ----- */
+.passengerCsPanel {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    min-height: 640px;
+    max-width: 28rem;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 36px;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.25rem;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.mobileSubview>:not([hidden])~:not([hidden]) {
+    margin-top: 1.25rem;
+}
+
+.passengerCsPanel2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+}
+
+.passengerCsPanel3 {
+    display: flex;
+    height: 2rem;
+    width: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-image: linear-gradient(to top right,var(--g-stops));
+    --g-from: #2563eb;
+    --g-to: rgba(37,99,235,0);
+    --g-stops: var(--g-from),var(--g-to);
+    --g-to: #4f46e5;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.passengerWelcomeCommuterText {
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.passengerCarlFrancisText {
+    display: block;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.passengerPsuStudentText {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.3);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 10px;
+    font-weight: 800;
+    color: #fde047;
+}
+
+.passengerPartidoStatePanel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: rgba(96,165,250,0.3);
+    background-image: linear-gradient(to bottom right,var(--g-stops));
+    --g-from: #1d4ed8;
+    --g-to: rgba(29,78,216,0);
+    --g-stops: var(--g-from),var(--g-to);
+    --g-stops: var(--g-from),#3730a3,var(--g-to);
+    --g-to: #0f172a;
+    padding: 1.25rem;
+    color: #ffffff;
+    box-shadow: 0 20px 25px -5px var(--sc,rgba(0,0,0,0.1)),0 8px 10px -6px var(--sc,rgba(0,0,0,0.1));
+}
+
+.passengerPanel {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    opacity: 0.1;
+}
+
+.passengerIconBus {
+    height: 10rem;
+    width: 10rem;
+}
+
+.passengerPartidoStatePanel2 {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.passengerPartidoStateText {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #bfdbfe;
+}
+
+.passengerStudentTransitTitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 800;
+}
+
+.passengerIconNfc {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #93c5fd;
+}
+
+.passengerCardBalancePanel {
+    margin-bottom: 1rem;
+}
+
+.passengerCardBalanceText {
+    display: block;
+    font-size: 10px;
+    color: #bfdbfe;
+}
+
+.passengerAppBalance {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -.025em;
+    color: #ffffff;
+}
+
+.passengerStudentIdPanel {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.passengerStudentIdText {
+    display: block;
+    font-size: 9px;
+    color: #bfdbfe;
+}
+
+.passengerPsuText {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-weight: 700;
+}
+
+.passengerEnrolledActiveText {
+    font-weight: 600;
+    color: #6ee7b7;
+}
+
+.passengerLowBalance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: rgba(244,63,94,0.3);
+    background-color: rgba(244,63,94,0.1);
+    padding: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.passengerLowBalanceText {
+    font-weight: 600;
+    color: #fda4af;
+}
+
+.passengerTopUpBtn {
+    border-radius: .5rem;
+    background-color: #f43f5e;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.passengerTopUpBtn:hover {
+    background-color: #fb7185;
+}
+
+.passengerTopUpPanel {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0.75rem;
+}
+
+.passengerTopUpBtn2 {
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.75rem;
+    text-align: center;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.passengerIconPlusCircle {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #34d399;
+}
+
+.passengerTopUpText {
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.passengerIconQrCode {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #c084fc;
+}
+
+.passengerRecentTripPanel {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 1rem;
+}
+
+.passengerRecentTripTitle {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #cbd5e1;
+}
+
+.passengerViewAllBtn {
+    font-size: 10px;
+    font-weight: 400;
+    color: #60a5fa;
+}
+
+.passengerViewAllBtn:hover {
+    text-decoration-line: underline;
+}
+
+.passengerReceiptsList>:not([hidden])~:not([hidden]) {
+    margin-top: 0.625rem;
+}
+
+.passengerReceiptsList {
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.passengerTransactionHistoryPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+}
+
+.passengerTransactionHistoryTitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.passengerClickAnyText {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.passengerVerifiedLogsText {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(59,130,246,0.3);
+    background-color: rgba(59,130,246,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 10px;
+    color: #93c5fd;
+}
+
+.passengerFullHistoryList>:not([hidden])~:not([hidden]) {
+    margin-top: 0.75rem;
+}
+
+.passengerFullHistoryList {
+    max-height: 440px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.passengerCommuterProfilePanel {
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+}
+
+.passengerCsPanel4 {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 1rem;
+    text-align: center;
+}
+
+.passengerCsPanel4>:not([hidden])~:not([hidden]) {
+    margin-top: 0.5rem;
+}
+
+.passengerCsPanel5 {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    height: 4rem;
+    width: 4rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-image: linear-gradient(to top right,var(--g-stops));
+    --g-from: #2563eb;
+    --g-to: rgba(37,99,235,0);
+    --g-stops: var(--g-from),var(--g-to);
+    --g-to: #4f46e5;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+}
+
+.passengerCarlFrancisTitle {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.passengerStudentIdText2 {
+    display: inline-block;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.3);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fde047;
+}
+
+.passengerCourseYearPanel {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.passengerCourseYearPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 0.75rem;
+}
+
+.passengerCourseYearPanel2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.passengerCourseYearText {
+    color: #94a3b8;
+}
+
+.passengerBsitRdText {
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.passengerPsuStudentText2 {
+    font-weight: 700;
+    color: #facc15;
+}
+
+.passengerGcashText {
+    font-weight: 600;
+    color: #34d399;
+}
+
+.passengerNfcRfidPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.passengerActiveValidatedText {
+    font-weight: 700;
+    color: #34d399;
+}
+
+.passengerHomePanel {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    border-top-width: 1px;
+    border-color: #0f172a;
+    padding-top: 0.75rem;
+    font-size: 10px;
+}
+
+.mobileNavBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.mobileNavBtn:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.passengerText {
+    display: block;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.passengerText2 {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.passengerPanel2 {
+    display: flex;
+    justify-content: space-between;
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.5rem;
+}
+
+.passengerText3 {
+    color: #e2e8f0;
+}
+
+.passengerText4 {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #64748b;
+}
+
+.ledgerAmount {
+    display: block;
+    font-weight: 700;
+}
+
+.ledgerAmountOut {
+    color: #fb7185;
+}
+
+.topupMethod {
+    border-radius: .75rem;
+    border-width: 1px;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.topupMethodSelected {
+    border-color: #10b981;
+    background-color: rgba(16,185,129,0.1);
+}
+
+.topupMethodIdle {
+    border-color: #1e293b;
+    background-color: #0f172a;
+}
+
+.topupMethodIdle:hover {
+    background-color: #1e293b;
+}
+
+/* ----- University accountant desk ----- */
+.universityPartidoStatePanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+}
+
+@media (min-width:768px) {
+    .universityPartidoStatePanel {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.universityPartidoStateTitle {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.universityPartidoStateTitle>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.universityIconGraduationCap {
+    height: 1.75rem;
+    width: 1.75rem;
+    color: #facc15;
+}
+
+.universityStudentsWithoutText {
+    margin-top: 0.25rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.universityBusLinkBtn {
+    display: flex;
+    align-items: center;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.4);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #fde047;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.universityBusLinkBtn>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.universityBusLinkBtn:hover {
+    background-color: rgba(234,179,8,0.3);
+}
+
+.universityUniversityStudentPanel {
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px var(--sc,rgba(0,0,0,0.1)),0 8px 10px -6px var(--sc,rgba(0,0,0,0.1));
+}
+
+@media (min-width:1024px) {
+    .universityUniversityStudentPanel {
+        grid-column: span 8 / span 8;
+    }
+}
+
+.universityUniversityStudentTitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.universityTransitDiscountText {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #facc15;
+}
+
+.universityStudentIdTable {
+    width: 100%;
+    text-align: left;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.universityUniversityCashierPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 1.5rem;
+}
+
+@media (min-width:1024px) {
+    .universityUniversityCashierPanel {
+        grid-column: span 4 / span 4;
+    }
+}
+
+.universityUniversityCashierTitle {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.universityUniversityCashierTitle>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.universityIconBuilding {
+    height: 1rem;
+    width: 1rem;
+    color: #facc15;
+}
+
+.universityPsuTopupId {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.universityPsuTopupAmount {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.universityDepositStudentBtn {
+    width: 100%;
+    border-radius: .75rem;
+    background-color: #ca8a04;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #020617;
+    box-shadow: 0 10px 15px -3px var(--sc,rgba(0,0,0,0.1)),0 4px 6px -4px var(--sc,rgba(0,0,0,0.1));
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.universityDepositStudentBtn:hover {
+    background-color: #eab308;
+}
+
+.universityRecentCashierTitle {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.universityPsuDepositLog>:not([hidden])~:not([hidden]) {
+    margin-top: 0.5rem;
+}
+
+.universityPsuDepositLog {
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.universityNoDepositsText {
+    color: #64748b;
+}
+
+.universityBusLinkText {
+    margin-bottom: 0.75rem;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.universityStudentIdTable2 {
+    width: 100%;
+    text-align: left;
+    font-size: 11px;
+}
+
+.universityStudentIdHead {
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.universityStudentIdCol {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.universityCell {
+    padding: 0.75rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-weight: 700;
+    color: #fde047;
+}
+
+.universityCell2 {
+    padding: 0.75rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #cbd5e1;
+}
+
+.universityCell3 {
+    padding: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.universityCell4 {
+    padding: 0.75rem;
+    color: #94a3b8;
+}
+
+.universityCell5 {
+    padding: 0.75rem;
+}
+
+.universityText {
+    border-radius: .25rem;
+    border-width: 1px;
+    border-color: rgba(16,185,129,0.3);
+    background-color: rgba(16,185,129,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 700;
+    color: #34d399;
+}
+
+.universityShareBusBtn {
+    border-radius: .25rem;
+    border-width: 1px;
+    border-color: rgba(234,179,8,0.4);
+    background-color: rgba(234,179,8,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 11px;
+    color: #fde047;
+}
+
+.universityShareBusBtn:hover {
+    background-color: rgba(234,179,8,0.3);
+}
+
+.universityCell6 {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #fde047;
+}
+
+.universityCell7 {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+.ledgerAmountIn {
+    color: #34d399;
+}
+
+.universityNoDataCell {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #64748b;
+}
+
+/* ----- Role selection ----- */
+.roleAreViewingText {
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.rolePanel {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.roleText {
+    font-weight: 400;
+    color: #94a3b8;
+}
+
+.roleText2 {
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.roleSwitchRoleBtn {
+    border-radius: .5rem;
+    background-color: #1e293b;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.roleSwitchRoleBtn:hover {
+    background-color: #334155;
+}
+
+/* ----- Toasts ----- */
+.toastIcon {
+    height: 1rem;
+    width: 1rem;
+    color: #60a5fa;
+}
+
+.toast {
+    display: flex;
+    pointer-events: auto;
+    align-items: center;
+    border-radius: .75rem;
+    border-width: 1px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+    transition-duration: 300ms;
+}
+
+.toast>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.toastError {
+    border-color: #991b1b;
+    background-color: #450a0a;
+    color: #fecaca;
+}
+
+.toastInfo {
+    border-color: #334155;
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+.toastLeaving {
+    transform: translateY(.5rem);
+    opacity: 0;
+}
+
+/* ----- Shared / app shell ----- */
+.appBusLinkBody {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+.appGoaCentralMain {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80rem;
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+@media (min-width:640px) {
+    .appGoaCentralMain {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width:1024px) {
+    .appGoaCentralMain {
+        padding: 2rem;
+    }
+}
+
+.appToastContainer {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
+    display: flex;
+    pointer-events: none;
+    flex-direction: column;
+}
+
+.appToastContainer>:not([hidden])~:not([hidden]) {
+    margin-top: 0.5rem;
+}
+
+.appRoleBanner {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.appPanel {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 0.625rem;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.appPanel:hover {
+    background-color: #0f172a;
+}
+
+.appText {
+    display: block;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.appText2 {
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.appPanel2 {
+    text-align: right;
+}
+
+.appText3 {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: 9px;
+    color: #94a3b8;
+}
+
+/* ----- Register Card Modal ----- */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7);
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+}
+
+.registerCardModalIssueNewPanel {
+    width: 100%;
+    max-width: 28rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.registerCardModalIssueNewTitle {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.registerCardModalCardUidForm>:not([hidden])~:not([hidden]) {
+    margin-top: 0.75rem;
+}
+
+.registerCardModalCardUidForm {
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.registerCardModalNewCardUid {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    color: #e2e8f0;
+}
+
+.registerCardModalNewCardName {
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    color: #e2e8f0;
+}
+
+.registerCardModalCancelPanel {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.75rem;
+}
+
+.registerCardModalCancelPanel>:not([hidden])~:not([hidden]) {
+    margin-left: 0.5rem;
+}
+
+.registerCardModalCancelBtn {
+    border-radius: .75rem;
+    background-color: #0f172a;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.registerCardModalCancelBtn:hover {
+    background-color: #1e293b;
+}
+
+.registerCardModalIssueCardBtn {
+    border-radius: .75rem;
+    background-color: #2563eb;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.registerCardModalIssueCardBtn:hover {
+    background-color: #3b82f6;
+}
+
+/* ----- Mobile Ticket Modal ----- */
+.mobileTicketModalBusLinkPanel {
+    width: 100%;
+    max-width: 24rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.mobileTicketModalTicketModalTitle {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.mobileTicketModalTicketModalSubtitle {
+    margin-bottom: 1rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.mobileTicketModalPanel {
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    border-radius: 1rem;
+    border-width: 4px;
+    border-color: #1e293b;
+    background-color: #ffffff;
+    padding: 1rem;
+    box-shadow: inset 0 2px 4px 0 var(--sc,rgba(0,0,0,0.05));
+}
+
+.mobileTicketModalGraphic {
+    height: 10rem;
+    width: 10rem;
+}
+
+.mobileTicketModalReferenceIdPanel {
+    margin-bottom: 1rem;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.mobileTicketModalReferenceIdPanel>:not([hidden])~:not([hidden]) {
+    margin-top: 0.375rem;
+}
+
+.mobileTicketModalReferenceIdPanel2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-color: #1e293b;
+    padding-bottom: 0.375rem;
+}
+
+.mobileTicketModalReferenceIdText {
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.mobileTicketModalTicketRefDisplay {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: #facc15;
+}
+
+.mobileTicketModalRouteTripPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.mobileTicketModalRouteTripText {
+    color: #94a3b8;
+}
+
+.mobileTicketModalTicketRouteDisplay {
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.mobileTicketModalTicketFareDisplay {
+    font-weight: 700;
+    color: #34d399;
+}
+
+.mobileTicketModalTicketHolderDisplay {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    font-size: 11px;
+    color: #cbd5e1;
+}
+
+.mobileTicketModalStatusPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-width: 1px;
+    border-color: #1e293b;
+    padding-top: 0.375rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.mobileTicketModalTicketStatusDisplay {
+    border-radius: .25rem;
+    border-width: 1px;
+    border-color: rgba(16,185,129,0.3);
+    background-color: rgba(16,185,129,0.2);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    font-size: 10px;
+    font-weight: 800;
+    color: #6ee7b7;
+}
+
+.mobileTicketModalDoneBtn {
+    width: 100%;
+    border-radius: .75rem;
+    background-color: #1e293b;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: 150ms;
+}
+
+.mobileTicketModalDoneBtn:hover {
+    background-color: #334155;
+}
+
+/* ----- Mobile Topup Modal ----- */
+.mobileTopupModalTopUpPanel {
+    width: 100%;
+    max-width: 24rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #020617;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px var(--sc,rgba(0,0,0,0.25));
+}
+
+.mobileTopupModalTopUpTitle {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.mobileTopupModalChooseEText {
+    margin-bottom: 1rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #94a3b8;
+}
+
+.mobileTopupModalTopupMethods {
+    margin-bottom: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0.5rem;
+}
+
+.mobileTopupModalPanel {
+    margin-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 0.5rem;
+}
+
+.mobileTopupModalBtn {
+    border-radius: .5rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.mobileTopupModalBtn:hover {
+    background-color: #1e293b;
+}
+
+.mobileTopupModalTopupAmount {
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: .75rem;
+    border-width: 1px;
+    border-color: #1e293b;
+    background-color: #0f172a;
+    padding: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #e2e8f0;
+}
+
+.mobileTopupModalCancelPanel {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mobileTopupModalCancelBtn {
+    flex: 1 1 0%;
+    border-radius: .75rem;
+    background-color: #1e293b;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.mobileTopupModalCancelBtn:hover {
+    background-color: #334155;
+}
+
+.mobileTopupModalConfirmTopBtn {
+    flex: 1 1 0%;
+    border-radius: .75rem;
+    background-color: #059669;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.mobileTopupModalConfirmTopBtn:hover {
+    background-color: #10b981;
+}
+
+/* ===== State classes ===== */
+.mobileNavBtn {
+    color: #64748b;
+}
+
+.mobileNavBtn:not(.isActive):hover {
+    color: #cbd5e1;
+}
+
+.mobileNavBtn.isActive {
+    color: #60a5fa;
+}
+
+/* ===== Custom styles ===== */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.tapPulse {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ----- System map (landing screen) ----- */
+.mapWrap {
+    width: 100%;
+    max-width: 62rem;
+}
+
+.mapHeader {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.mapTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.mapSubtitle {
+    font-size: .875rem;
+    color: #94a3b8;
+    margin-top: .25rem;
+}
+
+.mapBoard {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 1.25rem;
+}
+
+.mapNode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    min-height: 12rem;
+    padding: 1.25rem;
+    text-align: center;
+    color: #e2e8f0;
+    background-color: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 1rem;
+    transition: all .15s;
+}
+
+.mapNode:hover,.mapNode:focus-visible {
+    border-color: #3b82f6;
+    background-color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(59,130,246,.25);
+}
+
+.mapIcon svg {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: #93c5fd;
+}
+
+.mapBus svg {
+    width: 5rem;
+    height: 5rem;
+    color: #e2e8f0;
+}
+
+.mapPair {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: .75rem;
+    min-height: 4.5rem;
+}
+
+.mapFigure,.mapPhone {
+    height: 4.5rem;
+    fill: none;
+    stroke: #cbd5e1;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mapFigure {
+    width: 3rem;
+}
+
+.mapPhone {
+    width: 2.4rem;
+}
+
+.mapArrow {
+    width: 3.5rem;
+    height: 1rem;
+    margin-bottom: 1.5rem;
+    fill: none;
+    stroke: #60a5fa;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mapLabel {
+    font-size: .9rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mapRole {
+    font-size: .75rem;
+    color: #94a3b8;
+}
+
+.mapOpen {
+    font-size: .7rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.mapHint {
+    text-align: center;
+    font-size: .75rem;
+    color: #64748b;
+    margin-top: 1.25rem;
+}
+
+@media (max-width:760px) {
+    .mapBoard {
+        grid-template-columns: 1fr;
+    }
+    .mapNode {
+        min-height: 0;
+    }
+}
+
+.mapPage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #020617;
+    background-image: linear-gradient(rgba(148,163,184,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.08) 1px,transparent 1px);
+    background-size: 28px 28px;
+}
+
+.mapNode {
+    text-decoration: none;
+}
+
+.mapReset {
+    font-size: .75rem;
+    color: #94a3b8;
+    text-decoration: underline;
+}
+
+.roleSwitchRoleBtn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Visibility toggle (kept last so it always wins) */
+.isHidden {
+    display: none;
+}
+

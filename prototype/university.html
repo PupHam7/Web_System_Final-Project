@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Link - University Accountant</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="appBusLinkBody">
+
+    <header class="topbarBusLinkHeader">
+        <div class="topbarBusLinkPanel">
+            <div class="topbarBusLinkPanel2">
+                <!-- System Branding -->
+                <div class="topbarBusLinkPanel3">
+                    <div class="topbarPanel">
+                        <i data-lucide="bus" class="topbarIconBus"></i>
+                    </div>
+                    <div>
+                        <div class="inlineRow">
+                            <span class="topbarBusLinkText">BUS LINK</span>
+                            <span class="topbarPsuEcosystemText">PSU Ecosystem</span>
+                        </div>
+                        <p class="topbarOfflineFirstText">Offline-First Smart Bus Management System</p>
+                    </div>
+                </div>
+
+                <!-- Global Simulation Sync Indicator -->
+                <div class="topbarServerOnlinePanel">
+                    <div class="inlineRow">
+                        <span id="global-sync-badge" class="syncDotOnline"></span>
+                        <span id="global-sync-text" class="syncTextOnline">Server Online (Auto-Sync)</span>
+                    </div>
+                    <span class="topbarText">|</span>
+                    <div class="muted">
+                        PSU Registry Cache: <span class="topbarEnrolledText">1,420 Enrolled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="appGoaCentralMain">
+
+        <div id="toast-container" class="appToastContainer"></div>
+
+        <div class="appRoleBanner">
+            <div>
+                <span class="roleAreViewingText">You are viewing as</span>
+                <div class="rolePanel">University Accountant <span class="roleText">· PSU accountant</span></div>
+                <p class="roleText2">Deposit for students without an e-wallet. Bus Link gets only limited student details.</p>
+            </div>
+            <a href="index.html" class="roleSwitchRoleBtn">← System map</a>
+        </div>
+
+        <section id="view-university" class="viewPanel">
+            <div class="universityPartidoStatePanel">
+                <div>
+                    <h1 class="universityPartidoStateTitle">
+                        <i data-lucide="graduation-cap" class="universityIconGraduationCap"></i>
+                        <span>Partido State University Portal: Accountant Desk</span>
+                    </h1>
+                    <p class="universityStudentsWithoutText">For students without an e-wallet: the university accountant deposits to the student card. The university keeps its own student database; Bus Link can request only limited details.</p>
+                </div>
+                <button onclick="syncUniversityRegistry()" class="universityBusLinkBtn">
+                    <i data-lucide="refresh-cw" class="icon"></i>
+                    <span>Bus Link Data Request (All Students)</span>
+                </button>
+            </div>
+
+            <div class="layoutGrid">
+                <!-- Enrolled Students Table -->
+                <div class="universityUniversityStudentPanel">
+                    <div class="sectionHeader">
+                        <h3 class="universityUniversityStudentTitle">University Student Database (PSU only)</h3>
+                        <span class="universityTransitDiscountText">
+                            20% Transit Discount Active
+                        </span>
+                    </div>
+
+                    <div class="tableScroll">
+                        <table class="universityStudentIdTable">
+                            <thead class="tableHead">
+                                <tr>
+                                    <th class="tableHeadFirst">Student ID</th>
+                                    <th class="tableHeadCell">Card UID</th>
+                                    <th class="tableHeadCell">Student Name</th>
+                                    <th class="tableHeadCell">Course / Year</th>
+                                    <th class="tableHeadCell">Status</th>
+                                    <th class="tableHeadLast">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tableBody" id="psu-student-table">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Campus Cashier Desk -->
+                <div class="universityUniversityCashierPanel">
+                    <div class="panel">
+                        <h3 class="universityUniversityCashierTitle">
+                            <i data-lucide="building" class="universityIconBuilding"></i>
+                            <span>University Cashier Deposit</span>
+                        </h3>
+                        <form onsubmit="handlePSUTopup(event)" class="formStack">
+                            <div>
+                                <label class="fieldLabelSm">Student ID Number</label>
+                                <input type="text" id="psu-topup-id" required placeholder="e.g. 2026-0881" class="universityPsuTopupId">
+                            </div>
+                            <div>
+                                <label class="fieldLabelSm">Deposit Amount (₱)</label>
+                                <input type="number" id="psu-topup-amount" min="10" max="5000" required placeholder="Amount in PHP" class="universityPsuTopupAmount">
+                            </div>
+                            <button type="submit" class="universityDepositStudentBtn">
+                                Deposit to Student Card
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="universityRecentCashierTitle">Recent Cashier Deposits</h3>
+                        <div id="psu-deposit-log" class="universityPsuDepositLog"><p class="universityNoDepositsText">No deposits yet.</p></div>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="universityRecentCashierTitle">Bus Link Record (limited details)</h3>
+                        <p class="universityBusLinkText">Bus Link receives only Student ID, name, card UID and enrollment status. Course and other university records stay in the PSU database.</p>
+                        <table class="universityStudentIdTable2">
+                            <thead class="universityStudentIdHead"><tr><th class="universityStudentIdCol">Student ID</th><th>Name</th><th>Card UID</th><th>Status</th></tr></thead>
+                            <tbody id="bus-student-cache" class="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
